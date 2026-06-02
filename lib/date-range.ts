@@ -13,16 +13,6 @@ export function addDays(date: string, days: number) {
   return toDateString(parsed);
 }
 
-export function defaultDateRange(days = 5): DateRange {
-  const fromDate = toDateString(new Date());
-  const toDate = addDays(fromDate, days);
-
-  return {
-    from: `${fromDate}T00:00:00`,
-    to: `${toDate}T00:00:00`,
-  };
-}
-
 export function defaultWorkWeekDateRange(date = new Date()): DateRange {
   const monday = startOfWorkWeek(toDateString(date));
 
