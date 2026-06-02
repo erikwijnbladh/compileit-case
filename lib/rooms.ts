@@ -1,4 +1,4 @@
-import { getDb } from "@/lib/db";
+import { getDb, type Room } from "@/lib/db";
 import { addDays, type DateRange } from "@/lib/date-range";
 
 const slotStartHour = 8;
@@ -97,6 +97,29 @@ export function getRoomsInDateRange({
   }
 
   return Array.from(rooms.values());
+}
+
+export function getRoom(id: number): Room | undefined {
+  return getDb()
+    .prepare("SELECT id, name, capacity FROM rooms WHERE id = ?")
+    .get(id) as Room | undefined;
+}
+
+// A bookable slot is one hour, aligned to the top of the hour, inside the
+// 08–17 window, Monday–Friday — the same rules the availability grid uses.
+export function isBookableSlot(startsAt: string, endsAt: string): boolean {
+  const start = new Date(startsAt);
+  const end = new Date(endsAt);
+
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return false;
+  if (start.getMinutes() !== 0 || start.getSeconds() !== 0) return false;
+  if (end.getTime() - start.getTime() !== 60 * 60 * 1000) return false;
+  if (start.getHours() < slotStartHour || start.getHours() >= slotEndHour) {
+    return false;
+  }
+
+  const weekday = start.getDay();
+  return weekday >= 1 && weekday <= 5;
 }
 
 export function getRoomAvailability(range: DateRange): AvailabilityResponse {
