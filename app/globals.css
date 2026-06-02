@@ -38,6 +38,34 @@
   background: radial-gradient(120% 120% at 50% 0%, #f4f3f1 0%, #e3e2df 100%);
 }
 
+@utility animate-fade-in {
+  animation: fade-in 0.2s ease both;
+}
+
+@utility animate-pop-in {
+  animation: pop-in 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
