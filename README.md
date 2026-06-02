@@ -44,10 +44,10 @@ Next.js (App Router) · React · TypeScript · Tailwind CSS · SQLite (`better-s
 - **A week range** is `from = Monday 00:00`, `to = Saturday 00:00` (`to` exclusive) — e.g. `from=2026-06-01&to=2026-06-06` is Mon–Fri.
 - **Bookings are validated server-side** — the room must exist and the slot must be a real 08–17 weekday hour — and **double-booking** is blocked by a `UNIQUE (room_id, starts_at)` constraint (the API returns 409 if it's already taken).
 
-## What I'd do next
+## What I'd do next (bugs to fix or missing stuff)
 
 - A short-lived reservation/hold for proper concurrency (see "On the booking model").
 - Show booked slots too, with who booked them.
-- Smarter handling of past dates.
+- Smarter handling of past dates, you can currently book rooms in the past.
 - I can't say how well this would scale, so I guess that's a future thing, making sure it's performant with big data sets.
 - Filter on more things than just room names i.e size, time spans etc.
