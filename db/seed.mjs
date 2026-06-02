@@ -29,8 +29,8 @@ const bookerNames = [
   "Alice Berg",
 ];
 
-const bookingCount = 18;
-const bookingDays = 7;
+const bookingCount = 135;
+const bookingDays = 5;
 const firstSlotHour = 8;
 const lastSlotHour = 17;
 
@@ -84,7 +84,7 @@ console.log(
 
 function buildSlots(savedRooms) {
   const slots = [];
-  const startDate = getToday();
+  const startDate = getCurrentWorkWeekStart();
 
   for (let day = 0; day < bookingDays; day += 1) {
     const date = addDays(startDate, day);
@@ -103,8 +103,22 @@ function buildSlots(savedRooms) {
   return slots;
 }
 
-function getToday() {
-  return new Date().toISOString().slice(0, 10);
+function getCurrentWorkWeekStart() {
+  const today = new Date();
+  const day = today.getDay();
+  const daysSinceMonday = day === 0 ? 6 : day - 1;
+
+  today.setDate(today.getDate() - daysSinceMonday);
+
+  return toDateString(today);
+}
+
+function toDateString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 }
 
 function addDays(date, days) {
