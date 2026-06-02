@@ -36,7 +36,7 @@ Next.js (App Router) · React · TypeScript · Tailwind CSS · SQLite (`better-s
 
 **On the booking model.** In reality you probably wouldn't handle bookings quite like this — you'd likely want some kind of short-lived reservation/hold to stop two people racing for the same slot while one of them is still typing their name, etc. But the unique constraint is a real, stateful guarantee at the DB level, so for the scope of this assignment it's enough.
 
-**Design.** I used the layout from the Figma, I did make minor changes however, took some liberty on the room filter, made it so we see the full work week.
+**Design.** Built from my Figma mockup: [Boka ett rum — Mobile](https://www.figma.com/design/5bVY3TGlVfOsLm5f7Xo8Jr/Boka-ett-rum-%E2%80%94-Mobile?m=auto&t=3pBy7ek1tYpOvUKM-6) (password: `duck-adobe-tone-field`). I used the layout from the Figma, I did make minor changes however, took some liberty on the room filter, made it so we see the full work week.
 
 ## Model + assumptions
 
